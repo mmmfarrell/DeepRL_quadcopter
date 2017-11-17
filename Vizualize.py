@@ -110,15 +110,15 @@ class QuadPlot(QtCore.QThread):
         self.w.addItem(self.body)
 
         # Keep track of my own state
-        self.x = np.zeros((6,))
+        self.x = np.zeros((12,))
 
     def plot(self, x_new):
-        dn = self.x[0] - x_new[0]
-        de = self.x[1] - x_new[1]
-        dd = self.x[2] - x_new[2]
-        dr = self.x[3] - x_new[3]
-        dp = self.x[4] - x_new[4]
-        dy = self.x[5] - x_new[5]
+        dn = - self.x[0] + x_new[0]
+        de = - self.x[1] + x_new[1]
+        dd = - self.x[2] + x_new[2]
+        dr = - self.x[6] + x_new[6]
+        dp = - self.x[7] + x_new[7]
+        dy = - self.x[8] + x_new[8]
         self.update(dn, de, dd, dr, dp, dy)
         self.x = x_new
 

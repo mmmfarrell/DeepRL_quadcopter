@@ -41,7 +41,7 @@ class PID:
 		d_term = 0.0
 
 		# Caluclate Derivative Term
-		if (self.kd_ > 0.0):
+		if (self.kd_ != 0.0):
 			if x_dot != None:
 				d_term = self.kd_ * x_dot
 			elif (dt > 0.0):
@@ -61,13 +61,14 @@ class PID:
 		self.last_state_ = current
 
 		u_unsat = p_term + i_term + d_term
+		# print "d", d_term
+		# print "kd", self.kd_
+		# print "kd", self.differentiator_
 		u = self.saturate(u_unsat, self.max_, self.min_)
 		# anti windup
 		if (self.ki_ != 0.0):
 			self.integrator_ = self.integrator_ + 1/self.ki_*(u - u_unsat)
 		return u
-
-		# TODO anti windup
 
 	def setGains(self,p,i,d,tau):
 		self.kp_ = p
