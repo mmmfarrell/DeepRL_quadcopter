@@ -119,8 +119,8 @@ class QuadPlot(QtCore.QThread):
         dr = - self.x[6] + x_new[6]
         dp = - self.x[7] + x_new[7]
         dy = - self.x[8] + x_new[8]
-        self.update(dn, de, dd, dr, dp, dy)
-        self.x = x_new
+        self.update(dn, de, dd, dr*180./np.pi, dp*180./np.pi, dy*180./np.pi)
+        self.x = x_new.copy()
 
     def update(self, dn, de, dd, dr, dp, dy):
 
@@ -161,6 +161,6 @@ if __name__ == '__main__':
     # import sys
     plotter = QuadPlot()
     for i in range(1000):
-        plotter.update(0.01, 0, 0, 0, 0, 0)
+        plotter.update(0.00, 0, 0, 0, 0.0, 0.1)
     # if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
     #     QtGui.QApplication.instance().exec_()
